@@ -1,0 +1,26 @@
+ds-vault
+========
+
+This repository contains a very simple utility called a "vault".
+The purpose of a vault is also very simple: to hold ERC20 tokens.
+
+A vault is useful any time you need to segregate token holdings into
+several distinct buckets, or when you want to set up a shared account,
+perhaps owned by a multisig <https://github.com/nexusdev/ds-multisig>.
+
+A single vault is able to hold any number of different ERC20 tokens.
+
+Vaults are protected by `DSAuth` <https://github.com/nexusdev/ds-auth>,
+which means they support sophisticated access control out of the box.
+
+Whoever owns or controls a `DSVault` can tell it to perform token
+operations, such as transferring X amount of token Y to account Z,
+or even (as long as the vault has the necessary ERC20 approval)
+transferring X amont of token Y from account W to account Z.
+
+Anyone is free to make deposits to a vault by simply transferring
+tokens directly into it using the regular ERC20 `transfer` function.
+The owner of a vault can also ask the vault to perform the transfer.
+
+Vaults are very staightforward to understand and think about, and can
+be a useful building block in many different kinds of applications.

@@ -1,5 +1,0 @@
-name: ds-vault
-version: 0.0.1
-layout:
-  sol_sources: src
-  build_dir: build

@@ -1,9 +1,6 @@
-version: 0.0.1-dev
-tags: []
+name:     ds-vault
+version:  0
 layout:
-  sol_sources: src
-  build_dir: build
-  packages_directory: .dapple/packages/
-dependencies: {}
-ignore: []
-name: ds-vault
+  build_dir:            build
+  packages_directory:   lib
+  sol_sources:          src

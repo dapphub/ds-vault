@@ -20,18 +20,18 @@ import "dapple/test.sol";
 import "erc20/erc20.sol";
 import "vault.sol";
 
-contract DSVaultTest is Test {
+contract DSMultiVaultTest is Test {
     function testVault() {
         var token = new FakeToken();
-        var vault1 = new DSVault();
-        var vault2 = new DSVault();
+        var vault1 = new DSMultiVault();
+        var vault2 = new DSMultiVault();
         token.transfer(vault1, 100);
         assertEq(token.balances(vault1), 100);
         assertEq(token.balances(this), -100);
-        vault1.transfer(ERC20(token), vault2, 20);
+        vault1.doTransfer(ERC20(token), vault2, 20);
         assertEq(token.balances(vault1), 80);
         assertEq(token.balances(vault2), 20);
-        vault1.transferFrom(ERC20(token), vault2, this, 5);
+        vault1.doTransferFrom(ERC20(token), vault2, this, 5);
         assertEq(token.balances(vault1), 80);
         assertEq(token.balances(vault2), 15);
         assertEq(token.balances(this), -95);

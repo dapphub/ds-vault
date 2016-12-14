@@ -18,7 +18,9 @@ pragma solidity ^0.4.2;
 
 import "dapple/test.sol";
 import "erc20/erc20.sol";
-import "vault.sol";
+import "./vault.sol";
+import "./multivault.sol";
+
 
 contract DSMultiVaultTest is Test {
     function testVault() {

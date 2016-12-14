@@ -19,33 +19,16 @@ pragma solidity ^0.4.6;
 import "ds-auth/auth.sol";
 import "erc20/erc20.sol";
 
-contract DSVault is DSAuth {
-    ERC20 _token;
-
-    function DSVault( ERC20 token ) {
-        setToken(token);
+contract DSMultiVault is DSAuth {
+    function doTransfer(
+        ERC20 token, address dst, uint x
+    ) auth returns (bool) {
+        return token.transfer(dst, x);
     }
 
-    function doTransfer( address dst, uint x)
-        auth returns (bool)
-    {
-        return _token.transfer(dst, x);
-    }
-
-    function doTransferFrom(address src, address dst, uint x)
-        auth returns (bool)
-    {
-        return _token.transferFrom(src, dst, x);
-    }
-
-    function setToken(ERC20 token)
-        auth
-    {
-        _token = token;
-    }
-    
-    function getToken() returns (ERC20 token)
-    {
-        return _token;
+    function doTransferFrom(
+        ERC20 token, address src, address dst, uint x
+    ) auth returns (bool) {
+        return token.transferFrom(src, dst, x);
     }
 }

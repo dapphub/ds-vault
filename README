@@ -8,7 +8,11 @@ A vault is useful any time you need to segregate token holdings into
 several distinct buckets, or when you want to set up a shared account,
 perhaps owned by a multisig <https://github.com/nexusdev/ds-multisig>.
 
-A single vault is able to hold any number of different ERC20 tokens.
+A `DSMultiVault` able to hold any number of different ERC20 tokens.
+
+A `DSVault` is bound to a single token. It is useful as a handle on
+the token that the system can pass around without also needing to
+transfer the tokens themselves, or passing a Multivault/Token pair.
 
 Vaults are protected by `DSAuth` <https://github.com/nexusdev/ds-auth>,
 which means they support sophisticated access control out of the box.

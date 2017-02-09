@@ -14,7 +14,7 @@
    limitations under the License.
 */
 
-pragma solidity ^0.4.2;
+pragma solidity ^0.4.9;
 
 import "dapple/test.sol";
 import "erc20/erc20.sol";

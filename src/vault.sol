@@ -23,7 +23,7 @@ contract DSVault is DSAuth {
     ERC20 _token;
 
     function DSVault( ERC20 token ) {
-        setToken(token);
+        swap(token);
     }
 
     function push( address dst, uint x)

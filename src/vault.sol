@@ -14,41 +14,29 @@
    limitations under the License.
 */
 
-pragma solidity ^0.4.6;
+pragma solidity ^0.4.8;
 
-import "ds-auth/auth.sol";
-import "erc20/erc20.sol";
+import "ds-token/token.sol";
 
 contract DSVault is DSAuth {
-    ERC20 _token;
+    ERC20  public  token;
 
-    function DSVault( ERC20 token ) {
-        swap(token);
+    function swap(ERC20 token_) auth {
+        token = token_;
     }
 
-    function push( address dst, uint x)
-        auth
-        returns (bool)
-    {
-        return _token.transfer(dst, x);
+    function push(address dst, uint x) auth returns (bool) {
+        return token.transfer(dst, x);
+    }
+    function pull(address src, uint x) auth returns (bool) {
+        return token.transferFrom(src, this, x);
     }
 
-    function pull(address src, uint x)
-        auth
-        returns (bool)
-    {
-        return _token.transferFrom(src, this, x);
+    function mint(uint x) auth returns (bool) {
+        return DSToken(token).mint(this, x);
     }
-
-    function swap(ERC20 token)
-        auth
-    {
-        _token = token;
-    }
-    
-    function getToken() returns (ERC20 token)
-    {
-        return _token;
+    function burn(uint x) auth returns (bool) {
+        return DSToken(token).burn(this, x);
     }
 }
 

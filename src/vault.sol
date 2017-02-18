@@ -30,14 +30,14 @@ contract DSVault is DSAuth {
         auth
         returns (bool)
     {
-        return _token.transferFrom(this, dst, x);
+        return _token.transfer(dst, x);
     }
 
-    function pull(address src, address dst, uint x)
+    function pull(address src, uint x)
         auth
         returns (bool)
     {
-        return _token.transferFrom(src, dst, x);
+        return _token.transferFrom(src, this, x);
     }
 
     function swap(ERC20 token)

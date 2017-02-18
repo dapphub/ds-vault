@@ -33,10 +33,10 @@ contract DSVault is DSAuth {
     }
 
     function mint(uint x) auth returns (bool) {
-        return DSToken(token).mint(this, x);
+        return DSToken(token).mint(x);
     }
     function burn(uint x) auth returns (bool) {
-        return DSToken(token).burn(this, x);
+        return DSToken(token).burn(x);
     }
 }
 

@@ -20,10 +20,10 @@ contract DSVault is DSMultiVault {
         token = token_;
     }
 
-    function push(address dst, uint wad) {
+    function push(address dst, uint128 wad) {
         push(token, dst, wad);
     }
-    function pull(address src, uint wad) {
+    function pull(address src, uint128 wad) {
         pull(token, src, wad);
     }
 
@@ -34,10 +34,10 @@ contract DSVault is DSMultiVault {
         pull(token, src);
     }
 
-    function mint(uint wad) {
+    function mint(uint128 wad) {
         mint(DSToken(token), wad);
     }
-    function burn(uint wad) {
+    function burn(uint128 wad) {
         burn(DSToken(token), wad);
     }
 }

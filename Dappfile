@@ -1,6 +1,6 @@
 name            ds-vault
-description
-kelvin          99
+description     Vaults hold ERC20 tokens
+version         K99
 
 author          Nikolai Mushegian <nikolai@nexusdev.us>
 author          Daniel Brockman <daniel@brockman.se>

@@ -25,18 +25,18 @@ contract DSVault is DSAuth {
         token = token_;
     }
 
-    function push(address dst, uint x) auth {
-        assert(token.transfer(dst, x));
+    function push(address dst, uint wad) auth {
+        assert(token.transfer(dst, wad));
     }
-    function pull(address src, uint x) auth {
-        assert(token.transferFrom(src, this, x));
+    function pull(address src, uint wad) auth {
+        assert(token.transferFrom(src, this, wad));
     }
 
-    function mint(uint x) auth {
-        DSToken(token).mint(x);
+    function mint(uint wad) auth {
+        DSToken(token).mint(wad);
     }
-    function burn(uint x) auth {
-        DSToken(token).burn(x);
+    function burn(uint wad) auth {
+        DSToken(token).burn(wad);
     }
 
     function assert(bool x) {

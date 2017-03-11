@@ -36,6 +36,10 @@ contract DSMultiVault is DSAuth {
         token.burn(wad);
     }
 
+    function burn(DSToken token) auth {
+        token.burn(cast(token.balanceOf(this)));
+    }
+
     function assert(bool x) {
         if (!x) throw;
     }

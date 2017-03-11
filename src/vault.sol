@@ -40,7 +40,8 @@ contract DSVault is DSMultiVault {
     function burn(uint128 wad) {
         burn(DSToken(token), wad);
     }
+
+    function burn() {
+        burn(DSToken(token));
+    }
 }
-
-
-

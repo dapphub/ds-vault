@@ -1,4 +1,4 @@
-/// vault.sol -- ERC20 token vault
+/// vault.sol -- vault for holding a single kind of ERC20 tokens
 
 // Copyright (C) 2016, 2017  Nexus Development, LLC
 
@@ -11,38 +11,34 @@
 
 pragma solidity ^0.4.8;
 
-import "ds-token/token.sol";
+import "./multivault.sol";
 
-contract DSVault is DSAuth {
+contract DSVault is DSMultiVault {
     ERC20  public  token;
 
     function swap(ERC20 token_) auth {
         token = token_;
     }
 
-    function push(address dst, uint wad) auth {
-        assert(token.transfer(dst, wad));
+    function push(address dst, uint wad) {
+        push(token, dst, wad);
     }
-    function pull(address src, uint wad) auth {
-        assert(token.transferFrom(src, this, wad));
+    function pull(address src, uint wad) {
+        pull(token, src, wad);
     }
 
     function push(address dst) {
-        push(dst, token.balanceOf(this));
+        push(token, dst);
     }
     function pull(address src) {
-        pull(src, token.balanceOf(src));
+        pull(token, src);
     }
 
-    function mint(uint wad) auth {
-        DSToken(token).mint(wad);
+    function mint(uint wad) {
+        mint(DSToken(token), wad);
     }
-    function burn(uint wad) auth {
-        DSToken(token).burn(wad);
-    }
-
-    function assert(bool x) {
-        if (!x) throw;
+    function burn(uint wad) {
+        burn(DSToken(token), wad);
     }
 }
 

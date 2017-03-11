@@ -24,13 +24,12 @@ contract DSMultiVaultTest is DSTest {
         token.transfer(vault1, 100);
         assertEq(token.balances(vault1), 100);
         assertEq(token.balances(this), -100);
-        vault1.doTransfer(ERC20(token), vault2, 20);
+        vault1.push(ERC20(token), vault2, 20);
         assertEq(token.balances(vault1), 80);
         assertEq(token.balances(vault2), 20);
-        vault1.doTransferFrom(ERC20(token), vault2, this, 5);
-        assertEq(token.balances(vault1), 80);
+        vault1.pull(ERC20(token), vault2, 5);
+        assertEq(token.balances(vault1), 85);
         assertEq(token.balances(vault2), 15);
-        assertEq(token.balances(this), -95);
     }
 }
 
@@ -38,9 +37,11 @@ contract FakeToken {
     mapping (address => int) public balances;
     function transfer(address dst, uint x) returns (bool) {
         this.transferFrom(msg.sender, dst, x);
+        return true;
     }
     function transferFrom(address src, address dst, uint x) returns (bool) {
         balances[src] -= int(x);
         balances[dst] += int(x);
+        return true;
     }
 }

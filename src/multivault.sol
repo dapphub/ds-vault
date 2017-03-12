@@ -40,9 +40,6 @@ contract DSMultiVault is DSAuth {
         token.burn(cast(token.balanceOf(this)));
     }
 
-    function assert(bool x) {
-        if (!x) throw;
-    }
     function cast(uint256 x) constant returns (uint128 z) {
         assert((z = uint128(x)) == x);
     }

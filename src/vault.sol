@@ -16,32 +16,32 @@ import "./multivault.sol";
 contract DSVault is DSMultiVault {
     ERC20  public  token;
 
-    function swap(ERC20 token_) auth {
+    function swap(ERC20 token_) public auth {
         token = token_;
     }
 
-    function push(address dst, uint wad) {
+    function push(address dst, uint wad) public {
         push(token, dst, wad);
     }
-    function pull(address src, uint wad) {
+    function pull(address src, uint wad) public {
         pull(token, src, wad);
     }
 
-    function push(address dst) {
+    function push(address dst) public {
         push(token, dst);
     }
-    function pull(address src) {
+    function pull(address src) public {
         pull(token, src);
     }
 
-    function mint(uint wad) {
+    function mint(uint wad) public {
         super.mint(DSToken(token), wad);
     }
-    function burn(uint wad) {
+    function burn(uint wad) public {
         super.burn(DSToken(token), wad);
     }
 
-    function burn() {
+    function burn() public {
         burn(DSToken(token));
     }
 }

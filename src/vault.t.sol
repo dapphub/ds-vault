@@ -17,7 +17,7 @@ import "erc20/erc20.sol";
 import "./multivault.sol";
 
 contract DSMultiVaultTest is DSTest {
-    function testVault() {
+    function testVault() public {
         var token = new FakeToken();
         var vault1 = new DSMultiVault();
         var vault2 = new DSMultiVault();
@@ -35,11 +35,14 @@ contract DSMultiVaultTest is DSTest {
 
 contract FakeToken {
     mapping (address => int) public balances;
-    function transfer(address dst, uint x) returns (bool) {
+    function transfer(address dst, uint x) public returns (bool) {
         this.transferFrom(msg.sender, dst, x);
         return true;
     }
-    function transferFrom(address src, address dst, uint x) returns (bool) {
+    function transferFrom(address src, address dst, uint x)
+        public
+        returns (bool)
+    {
         balances[src] -= int(x);
         balances[dst] += int(x);
         return true;

@@ -15,34 +15,34 @@ import "ds-auth/auth.sol";
 import "ds-token/token.sol";
 
 contract DSMultiVault is DSAuth {
-    function push(ERC20 token, address dst, uint wad) auth {
+    function push(ERC20 token, address dst, uint wad) public auth {
         assert(token.transfer(dst, wad));
     }
-    function pull(ERC20 token, address src, uint wad) auth {
+    function pull(ERC20 token, address src, uint wad) public auth {
         assert(token.transferFrom(src, this, wad));
     }
 
-    function push(ERC20 token, address dst) {
+    function push(ERC20 token, address dst) public {
         push(token, dst, token.balanceOf(this));
     }
-    function pull(ERC20 token, address src) {
+    function pull(ERC20 token, address src) public {
         pull(token, src, token.balanceOf(src));
     }
 
-    function mint(DSToken token, uint wad) auth {
+    function mint(DSToken token, uint wad) public auth {
         token.mint(wad);
     }
-    function burn(DSToken token, uint wad) auth {
+    function burn(DSToken token, uint wad) public auth {
         token.burn(wad);
     }
-    function mint(DSToken token, address guy, uint wad) auth {
+    function mint(DSToken token, address guy, uint wad) public auth {
         token.mint(guy, wad);
     }
-    function burn(DSToken token, address guy, uint wad) auth {
+    function burn(DSToken token, address guy, uint wad) public auth {
         token.burn(guy, wad);
     }
 
-    function burn(DSToken token) auth {
+    function burn(DSToken token) public auth {
         token.burn(token.balanceOf(this));
     }
 }

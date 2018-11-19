@@ -22,10 +22,10 @@ import "ds-token/token.sol";
 
 contract DSMultiVault is DSAuth {
     function push(ERC20 token, address dst, uint wad) public auth {
-        require(token.transfer(dst, wad));
+        require(token.transfer(dst, wad), "ds-vault-token-transfer-failed");
     }
     function pull(ERC20 token, address src, uint wad) public auth {
-        require(token.transferFrom(src, this, wad));
+        require(token.transferFrom(src, this, wad), "ds-vault-token-transfer-failed");
     }
 
     function push(ERC20 token, address dst) public {

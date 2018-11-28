@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-pragma solidity ^0.4.23;
+pragma solidity >0.4.23;
 
 import "ds-test/test.sol";
 import "erc20/erc20.sol";
@@ -25,15 +25,16 @@ import "./multivault.sol";
 contract DSMultiVaultTest is DSTest {
     function testVault() public {
         FakeToken token = new FakeToken();
-        DSMultiVault vault1 = new DSMultiVault();
-        DSMultiVault vault2 = new DSMultiVault();
-        token.transfer(vault1, 100);
-        assertEq(token.balances(vault1), 100);
-        assertEq(token.balances(this), -100);
-        vault1.push(ERC20(token), vault2, 20);
+        address vault1 = address(new DSMultiVault());
+        address vault2 = address(new DSMultiVault());
+
+        token.transfer(address(vault1), 100);
+        assertEq(token.balances(address(vault1)), 100);
+        assertEq(token.balances(address(this)), -100);
+        DSMultiVault(vault1).push(ERC20(address(token)), address(vault2), 20);
         assertEq(token.balances(vault1), 80);
         assertEq(token.balances(vault2), 20);
-        vault1.pull(ERC20(token), vault2, 5);
+        DSMultiVault(vault1).pull(ERC20(address(token)), address(vault2), 5);
         assertEq(token.balances(vault1), 85);
         assertEq(token.balances(vault2), 15);
     }

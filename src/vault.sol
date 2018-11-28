@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-pragma solidity ^0.4.23;
+pragma solidity >0.4.23;
 
 import "./multivault.sol";
 
@@ -41,13 +41,13 @@ contract DSVault is DSMultiVault {
     }
 
     function mint(uint wad) public {
-        super.mint(DSToken(token), wad);
+        super.mint(DSToken(address(token)), wad);
     }
     function burn(uint wad) public {
-        super.burn(DSToken(token), wad);
+        super.burn(DSToken(address(token)), wad);
     }
 
     function burn() public {
-        burn(DSToken(token));
+        burn(DSToken(address(token)));
     }
 }

@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-pragma solidity ^0.4.13;
+pragma solidity >0.4.23;
 
 import "ds-auth/auth.sol";
 import "ds-token/token.sol";
@@ -25,11 +25,11 @@ contract DSMultiVault is DSAuth {
         require(token.transfer(dst, wad), "ds-vault-token-transfer-failed");
     }
     function pull(ERC20 token, address src, uint wad) public auth {
-        require(token.transferFrom(src, this, wad), "ds-vault-token-transfer-failed");
+        require(token.transferFrom(src, address(this), wad), "ds-vault-token-transfer-failed");
     }
 
     function push(ERC20 token, address dst) public {
-        push(token, dst, token.balanceOf(this));
+        push(token, dst, token.balanceOf(address(this)));
     }
     function pull(ERC20 token, address src) public {
         pull(token, src, token.balanceOf(src));
@@ -49,6 +49,6 @@ contract DSMultiVault is DSAuth {
     }
 
     function burn(DSToken token) public auth {
-        token.burn(token.balanceOf(this));
+        token.burn(token.balanceOf(address(this)));
     }
 }
